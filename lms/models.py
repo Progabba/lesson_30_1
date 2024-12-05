@@ -1,9 +1,13 @@
 from django.db import models
 
+
+
+
 class Course(models.Model):
     title = models.CharField(max_length=255)
     preview = models.ImageField(upload_to='course_previews/', blank=True, null=True)
     description = models.TextField()
+    user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -17,3 +21,4 @@ class Lesson(models.Model):
 
     def __str__(self):
         return self.title
+    user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, blank=True, null=True)
