@@ -5,7 +5,7 @@ from .validators import validate_video_url
 
 class CourseSerializer(serializers.ModelSerializer):
     lesson_count = serializers.SerializerMethodField()  # Добавляем новое поле
-
+    is_subscribed = serializers.SerializerMethodField()  # Проверка подписки
     def get_lesson_count(self, obj):
         return obj.lessons.count()  # Возвращаем количество уроков, связанных с курсом
 
