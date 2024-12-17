@@ -8,7 +8,7 @@ from users.permissions import IsModer, IsOwner
 from .models import Course, Subscription
 from .paginators import CoursePagination, LessonPagination
 from .serializers import CourseSerializer, CourseDetailSerializer
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, get_object_or_404
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, get_object_or_404, CreateAPIView
 from .models import Lesson
 from .serializers import LessonSerializer
 
@@ -96,4 +96,5 @@ class SubscriptionAPIView(APIView):
             message = 'Подписка добавлена'
 
         return Response({"message": message}, status=HTTP_200_OK)
+
 
