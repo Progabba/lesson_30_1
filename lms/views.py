@@ -14,6 +14,8 @@ from .serializers import LessonSerializer
 
 from rest_framework.permissions import IsAuthenticated
 
+from .tasks import send_course_update_email
+
 
 
 class CourseViewSet(ModelViewSet):
@@ -98,3 +100,20 @@ class SubscriptionAPIView(APIView):
         return Response({"message": message}, status=HTTP_200_OK)
 
 
+class UpdateCourseAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        course_id = request.data.get('course_id')
+        course = get_object_or_404(Course, id=course_id)
+
+        # Логика обновления курса (например, добавление нового материала)
+        course.update_materials()  # Предположим, у вас есть такой метод
+
+        # Список подписчиков
+        email_list = Subscription.objects.filter(course=course).values_list('user__email', flat=True)
+
+        # Асинхронная рассылка
+        send_course_update_email.delay(course.id, list(email_list))
+
+        return Response({"message": "Курс обновлен и пользователи уведомлены"}, status=200)
