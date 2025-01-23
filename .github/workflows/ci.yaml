@@ -30,19 +30,23 @@ jobs:
 
     - name: Run migrate
       env:
-        NAME: lms
-        USER: postgres
-        PASSWORD: 1234
-        HOST: localhost
+        DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        DATABASE_NAME: lms
+        DATABASE_USER: postgres
+        DATABASE_PASSWORD: 1234
+        DATABASE_HOST: localhost
+        DATABASE_PORT: 5432
       run: python manage.py migrate
 
     - name: Run tests
       env:
-        NAME: lms
-        USER: postgres
-        PASSWORD: 1234
-        HOST: localhost
-      run: python manage.py tests
+        DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        DATABASE_NAME: lms
+        DATABASE_USER: postgres
+        DATABASE_PASSWORD: 1234
+        DATABASE_HOST: localhost
+        DATABASE_PORT: 5432
+      run: python manage.py test
 
   deploy:
     runs-on: ubuntu-latest
