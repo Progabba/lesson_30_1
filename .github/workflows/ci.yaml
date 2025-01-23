@@ -41,7 +41,6 @@ jobs:
 
     - name: Run tests
       env:
-
         DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
         DB_NAME: ${{ secrets.DB_NAME }}
         DB_USER: ${{ secrets.DB_USER }}
