@@ -29,7 +29,7 @@ jobs:
         pip install -r requirements.txt
 
     - name: Run migrate
-      environment:
+      env:
         POSTGRES_USER: ${DATABASE_USER}
         POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
         POSTGRES_DB: ${DATABASE_NAME}
@@ -38,7 +38,7 @@ jobs:
       run: python manage.py migrate
 
     - name: Run tests
-      environment:
+      env:
         POSTGRES_USER: ${DATABASE_USER}
         POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
         POSTGRES_DB: ${DATABASE_NAME}
