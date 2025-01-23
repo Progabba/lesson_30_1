@@ -30,7 +30,7 @@ jobs:
 
     - name: Run migrations and tests
       env:
-        DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        DJANGO_SECRET_KEY: ${{ SECRET_KEY }}
       run: |
         python manage.py migrate
         python manage.py test
