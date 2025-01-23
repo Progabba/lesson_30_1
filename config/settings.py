@@ -95,8 +95,8 @@ DATABASES = {
         "NAME": os.getenv("DATABASE_NAME"),
         "USER": os.getenv("DATABASE_USER"),
         "PASSWORD": os.getenv("DATABASE_PASSWORD"),
-        "HOST": "lms",  # Имя сервиса PostgreSQL из Docker Compose
-        "PORT": "5432",  # Убедитесь, что здесь указан правильный порт
+        'HOST': os.getenv('DATABASE_HOST'),
+        'PORT': os.getenv('DATABASE_PORT'),
     }
 }
 
