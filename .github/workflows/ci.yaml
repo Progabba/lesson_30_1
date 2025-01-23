@@ -13,7 +13,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.10'
+        python-version: '3.12'
 
     - name: Cache pip
       uses: actions/cache@v3
@@ -30,18 +30,14 @@ jobs:
 
     - name: Run migrate
       env:
-        POSTGRES_USER: ${DATABASE_USER}
-        POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
-        POSTGRES_DB: ${DATABASE_NAME}
+
         DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
       run: python manage.py migrate
 
     - name: Run tests
       env:
-        POSTGRES_USER: ${DATABASE_USER}
-        POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
-        POSTGRES_DB: ${DATABASE_NAME}
+
         DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
       run: python manage.py test
