@@ -28,12 +28,21 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Run migrations and tests
+    - name: Run migrate
       env:
-        DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
-      run: |
-        python manage.py migrate
-        python manage.py test
+        NAME: lms
+        USER: postgres
+        PASSWORD: 1234
+        HOST: localhost
+      run: python manage.py migrate
+
+    - name: Run tests
+      env:
+        NAME: lms
+        USER: postgres
+        PASSWORD: 1234
+        HOST: localhost
+      run: python manage.py tests
 
   deploy:
     runs-on: ubuntu-latest
