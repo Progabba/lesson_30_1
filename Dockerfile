@@ -1,20 +1,16 @@
-# Используем базовый образ Python
+# Указываем базовый образ
 FROM python:3.12-slim
 
-# Устанавливаем рабочую директорию
+# Устанавливаем рабочую директорию в контейнере
 WORKDIR /app
 
-# Копируем файлы проекта в контейнер
-COPY . /app
+# Копируем файл с зависимостями и устанавливаем их
+COPY requirements.txt ./
+RUN pip install -r requirements.txt
 
-# Устанавливаем зависимости проекта
-RUN pip install --upgrade pip && \
-    pip install poetry && \
-    poetry config virtualenvs.create false && \
-    poetry install --no-dev
+# Копируем остальные файлы проекта в контейнер
+COPY . .
 
-# Открываем порт приложения
+# Открываем порт 8000 для взаимодействия с приложением
 EXPOSE 8000
 
-# Команда для запуска приложения
-CMD ["gunicorn", "lms.wsgi:application", "--bind", "0.0.0.0:8000"]

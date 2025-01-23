@@ -8,9 +8,12 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
+
 @shared_task
 def send_course_update_email(course_id, email_list):
-    from .models import Course  # Импортируем внутри задачи, чтобы избежать циклического импорта
+    from .models import (
+        Course,
+    )  # Импортируем внутри задачи, чтобы избежать циклического импорта
 
     course = Course.objects.get(id=course_id)
     subject = f"Обновление материалов курса: {course.name}"
@@ -18,6 +21,7 @@ def send_course_update_email(course_id, email_list):
 
     for email in email_list:
         send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [email])
+
 
 @shared_task
 def block_inactive_users():

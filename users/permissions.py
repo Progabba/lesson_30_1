@@ -1,5 +1,6 @@
 from rest_framework import permissions
 
+
 class IsModer(permissions.BasePermission):
 
     def has_permission(self, request, view):
@@ -12,4 +13,3 @@ class IsOwner(permissions.BasePermission):
         if obj.user == request.user:
             return True
         return False
-
