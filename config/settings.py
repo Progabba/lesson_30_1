@@ -93,13 +93,32 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv('DATABASE_NAME'),
-            'USER': os.getenv('DATABASE_USER'),
-            'PASSWORD': os.getenv('DATABASE_PASSWORD'),
-            'HOST': os.getenv('DATABASE_HOST' ),
+            'NAME': 'lms',
+            'USER': 'postgres',
+            'PASSWORD': '1234',
+            'HOST': 'localhost',
             'PORT': '5433',
         }
     }
+
+
+# DATABASE_NAME=lms
+# DATABASE_USER=postgres
+# DATABASE_PASSWORD=1234
+# DATABASE_HOST=localhost
+# DATABASE_PORT=5433
+
+# else:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql',
+#             'NAME': os.getenv('DATABASE_NAME'),
+#             'USER': os.getenv('DATABASE_USER'),
+#             'PASSWORD': os.getenv('DATABASE_PASSWORD'),
+#             'HOST': os.getenv('DATABASE_HOST' ),
+#             'PORT': '5433',
+#         }
+#     }
 
 
 # Password validation
